@@ -164,30 +164,10 @@ results/evaluation_results.csv
 
 ## Example Output
 
-```
-Loading AI responses...
-Evaluating responses...
-Calculating statistics...
-Saving report...
+![Program Output](output.png)
 
-==========================================
-AI RESPONSE QUALITY EVALUATION REPORT
-==========================================
+Example terminal execution showing the evaluation process, generated quality labels, and summary statistics.
 
-Total responses:      10
-Average score:        81.25%
-Median score:         75.00%
-Highest score:        100.00%
-Lowest score:         62.50%
-
-Acceptable:           6
-Needs Review:         2
-Rejected:             2
-
-Evaluation completed successfully.
-```
-
----
 
 ## Error Handling
 
