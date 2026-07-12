@@ -200,16 +200,24 @@ Instead of crashing, the application displays clear error messages.
 
 ## Future Improvements
 
-Potential future enhancements include:
+The current implementation is a rule-based proof of concept. Future versions could include:
 
-- Semantic similarity scoring
-- LLM-assisted evaluation
-- Bias detection
-- Toxicity detection
-- Interactive dashboard
-- Excel report export
-- Unit tests
-- Configuration file for evaluation rules
+### AI & Evaluation
+- Semantic similarity scoring using embeddings
+- LLM-assisted evaluation for more nuanced quality assessment
+- Automatic bias and toxicity detection
+- Configurable evaluation rules and scoring weights
+
+### User Experience
+- Web interface for uploading JSON files
+- Interactive dashboard with charts and filtering
+- Export reports to Excel and PDF
+
+### Software Engineering
+- Unit and integration tests
+- Configuration management
+- Logging and monitoring
+- REST API for integration with other systems
 
 
 ---
