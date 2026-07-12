@@ -93,16 +93,30 @@ Safety violations override the numerical score to prevent unsafe responses from 
 
 ---
 
-## Technologies
+## Tools
+
+### Programming Language
 
 - Python
+
+### Libraries
+
 - pandas
 - NumPy
-- JSON
 - pathlib
+
+### Data Handling
+
+- JSON
+
+### Development Environment
+
+- Visual Studio Code
+
+### Version Control
+
 - Git
 - GitHub
-- Visual Studio Code
 
 ---
 
