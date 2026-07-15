@@ -1,0 +1,34 @@
+{
+    "phrases": {
+        "unsafe": [
+            "stop immediately",
+            "without consulting",
+            "ignore your doctor",
+            "take more than",
+            "completely safe"
+        ],
+        "future_claim_markers": [
+            "2030",
+            "2031",
+            "2032",
+            "will definitely",
+            "has already won"
+        ]
+    },
+
+    "scoring": {
+        "maximum_score": 8,
+        "acceptable_threshold": 75,
+        "review_threshold": 50
+    },
+
+    "clarity": {
+        "minimum_words": 3,
+        "full_score_max_words": 50
+    },
+
+    "relevance": {
+        "full_score_matches": 2,
+        "partial_score_matches": 1
+    }
+}
