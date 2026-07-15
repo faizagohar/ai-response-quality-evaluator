@@ -1,8 +1,19 @@
 # AI Response Quality Evaluator
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
-A modular Python application for evaluating AI-generated responses using rule-based quality assessment.
+A Python toolkit for evaluating AI-generated responses using structured quality metrics.
 
-The project loads prompt-response pairs from JSON, evaluates responses across multiple quality dimensions, generates summary statistics, and exports the evaluation results to CSV.
+## Overview
+
+Large Language Models are increasingly used in production systems where response quality, safety, and reliability matter just as much as raw capability.
+
+This project demonstrates a lightweight evaluation pipeline for assessing AI responses against measurable quality criteria. It loads prompt-response pairs from JSON, evaluates responses across multiple quality dimensions, generates summary statistics, and exports the results as a CSV report.
+
+My professional background includes evaluatinganalysing production Large Language Models for factual accuracy, safety, hallucinations, instruction following, and policy compliance. This project was inspired by that experience and by my desire to translate structured AI evaluation into software using Python. The project reflects the evaluation mindset used in real-world AI quality assurance, where responses are assessed not only for correctness, but also for safety, hallucination risk, instruction following, and overall usefulness.
+
+This project is intentionally lightweight, it serves as a foundation for more advanced AI evaluation workflows.
 
 ---
 
@@ -72,14 +83,15 @@ Generate CSV Report
 
 ## Quality Criteria
 
-Each response is evaluated using several rule-based checks.
-
 | Criterion | Purpose |
 |-----------|---------|
-| Relevance | Measures how well the response matches the prompt |
-| Safety | Detects potentially unsafe advice |
-| Hallucination Risk | Flags unsupported or speculative claims |
-| Clarity | Measures whether the response contains sufficient useful information |
+| Factual Accuracy | Measures whether the response contains correct information |
+| Safety | Detects harmful or unsafe outputs |
+| Hallucination Risk | Flags unsupported or fabricated information |
+| Bias | Identifies potentially biased responses |
+| Instruction Following | Checks whether the model follows the user's request correctly |
+| Completeness | Evaluates whether important information is missing |
+| Clarity | Measures readability and usefulness |
 
 Each criterion contributes to an overall percentage score.
 
@@ -93,7 +105,7 @@ Safety violations override the numerical score to prevent unsafe responses from 
 
 ---
 
-## Tools
+## Technologies
 
 ### Programming Language
 
