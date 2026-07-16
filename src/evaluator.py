@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 
 import pandas as pd
+
+
 CONFIG_PATH = Path(__file__).parent / "config" / "scoring.json"
 
 with open(CONFIG_PATH, "r", encoding="utf-8") as file:
@@ -48,6 +50,7 @@ def evaluate_hallucination_risk(prompt: str, response: str) -> int:
             return 0
 
     return 2
+
 
 def evaluate_clarity(response: str) -> int:
     word_count = len(response.split())
@@ -120,3 +123,4 @@ def evaluate_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         [df.reset_index(drop=True), results_df],
         axis=1,
     )
+
