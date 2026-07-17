@@ -4,6 +4,17 @@ import pandas as pd
 
 
 def save_csv_report(df: pd.DataFrame) -> Path:
+    """Save evaluation results as a CSV report.
+
+    The report is written to the project's ``results`` directory. The
+    directory is created automatically if it does not already exist.
+
+    Args:
+        df: DataFrame containing evaluation results.
+
+    Returns:
+        Path: The path to the generated CSV report.
+    """
     project_root = Path(__file__).parent.parent
     results_dir = project_root / "results"
     results_dir.mkdir(exist_ok=True)
@@ -14,7 +25,19 @@ def save_csv_report(df: pd.DataFrame) -> Path:
     return output_path
 
 
-def print_summary(statistics: dict, output_path: Path) -> None:
+def print_summary(
+    statistics: dict[str, int | float],
+    output_path: Path,
+) -> None:
+    """Print a summary of the evaluation results.
+
+    Displays score statistics, quality label counts, and the location
+    of the generated CSV report.
+
+    Args:
+        statistics: Dictionary containing calculated evaluation metrics.
+        output_path: Path to the generated CSV report.
+    """
     print("\n" + "=" * 42)
     print("AI RESPONSE QUALITY EVALUATION REPORT")
     print("=" * 42)

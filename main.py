@@ -15,6 +15,18 @@ logger = logging.getLogger(__name__)
 
 
 def main() -> None:
+    """Run the complete AI response evaluation pipeline.
+
+    The application performs the following steps:
+
+    1. Load prompt-response pairs from the JSON dataset.
+    2. Evaluate each response using the configured quality criteria.
+    3. Calculate summary statistics.
+    4. Save the evaluation results as a CSV report.
+    5. Print the evaluation summary.
+
+    Any file or data validation errors are logged and reported.
+    """
     try:
         logger.info("Loading AI responses")
         df = load_responses()

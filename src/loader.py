@@ -7,6 +7,19 @@ REQUIRED_COLUMNS = {"id", "prompt", "response"}
 
 
 def load_responses() -> pd.DataFrame:
+    """Load prompt-response pairs from the project JSON dataset.
+
+    The function validates that the input file exists, contains valid JSON,
+    is not empty, and includes all required columns.
+
+    Returns:
+        pd.DataFrame: A DataFrame containing the prompt-response dataset.
+
+    Raises:
+        FileNotFoundError: If the input JSON file cannot be found.
+        ValueError: If the JSON is invalid, the dataset is empty,
+            or required columns are missing.
+    """
     project_root = Path(__file__).parent.parent
     json_path = project_root / "data" / "responses.json"
 
