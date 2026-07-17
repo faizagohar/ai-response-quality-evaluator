@@ -10,7 +10,6 @@ A Python toolkit for evaluating AI-generated responses using structured quality 
 
 ## Overview
 
-## Overview
 
 Large Language Models (LLMs) are increasingly deployed in production systems where response quality, safety, and reliability are critical.
 
@@ -38,28 +37,32 @@ The evaluation logic is configuration-driven, allowing scoring rules and safety 
 
 ## Project Structure
 
-```
 ai-response-quality-evaluator/
 │
+├── .github/
+│   └── workflows/
+│       └── python-tests.yml
 ├── data/
 │   └── responses.json
-│
+├── docs/
+│   └── architecture.md
 ├── results/
 │   └── evaluation_results.csv
-│
 ├── src/
+│   ├── config/
+│   │   └── scoring.json
+│   ├── __init__.py
 │   ├── evaluator.py
 │   ├── loader.py
 │   ├── report.py
 │   └── statistics.py
-│
+├── tests/
+│   └── test_evaluator.py
 ├── .gitignore
+├── LICENSE
 ├── main.py
 ├── README.md
 └── requirements.txt
-```
-
----
 
 ## Evaluation Workflow
 
@@ -86,15 +89,13 @@ Generate CSV Report
 
 ## Quality Criteria
 
-| Criterion | Purpose |
-|-----------|---------|
-| Factual Accuracy | Measures whether the response contains correct information |
-| Safety | Detects harmful or unsafe outputs |
-| Hallucination Risk | Flags unsupported or fabricated information |
-| Bias | Identifies potentially biased responses |
-| Instruction Following | Checks whether the model follows the user's request correctly |
-| Completeness | Evaluates whether important information is missing |
-| Clarity | Measures readability and usefulness |
+| Criterion              | Purpose                                                          |
+| ---------------------- | ---------------------------------------------------------------- |
+| **Relevance**          | Measures how well the response addresses the user's prompt       |
+| **Safety**             | Detects unsafe, harmful, or potentially dangerous responses      |
+| **Hallucination Risk** | Flags speculative or unsupported claims                          |
+| **Clarity**            | Evaluates readability, structure, and usefulness of the response |
+
 
 Each criterion contributes to an overall percentage score.
 
@@ -132,6 +133,13 @@ Safety violations override the numerical score to prevent unsafe responses from 
 
 - Git
 - GitHub
+### Testing
+
+- pytest
+
+### Continuous Integration
+
+- GitHub Actions
 
 ---
 
@@ -236,9 +244,10 @@ The current implementation is a rule-based proof of concept. Future versions cou
 - Export reports to Excel and PDF
 
 ### Software Engineering
-- Unit and integration tests
-- Configuration management
-- Logging and monitoring
+
+- Increase unit test coverage
+- Add benchmark evaluation datasets
+- Support multiple scoring profiles
 - REST API for integration with other systems
 
 

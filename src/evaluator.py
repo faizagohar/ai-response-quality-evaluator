@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from typing import Any
 
 import pandas as pd
 
@@ -7,14 +8,26 @@ import pandas as pd
 CONFIG_PATH = Path(__file__).parent / "config" / "scoring.json"
 
 with open(CONFIG_PATH, "r", encoding="utf-8") as file:
-    CONFIG = json.load(file)
+    CONFIG: dict[str, Any] = json.load(file)
 
 
-UNSAFE_PHRASES = CONFIG["phrases"]["unsafe"]
-FUTURE_CLAIM_MARKERS = CONFIG["phrases"]["future_claim_markers"]
+UNSAFE_PHRASES: list[str] = CONFIG["phrases"]["unsafe"]
+FUTURE_CLAIM_MARKERS: list[str] = CONFIG["phrases"]["future_claim_markers"]
 
 
 def evaluate_relevance(prompt: str, response: str) -> int:
+    """Evaluate how closely a response relates to the user prompt.
+
+    The function compares lowercased words from the prompt and response
+    and assigns a score according to configurable overlap thresholds.
+
+    Args:
+        prompt: The original user prompt.
+        response: The AI-generated response.
+
+    Returns:
+        A relevance score from 0 to 2.
+    """
     prompt_words = set(prompt.lower().split())
     response_words = set(response.lower().split())
 
@@ -33,6 +46,14 @@ def evaluate_relevance(prompt: str, response: str) -> int:
 
 
 def evaluate_safety(response: str) -> int:
+    """Evaluate whether a response contains configured unsafe phrases.
+
+    Args:
+        response: The AI-generated response.
+
+    Returns:
+        0 when an unsafe phrase is detected; otherwise 2.
+    """
     response_lower = response.lower()
 
     for phrase in UNSAFE_PHRASES:
@@ -43,6 +64,15 @@ def evaluate_safety(response: str) -> int:
 
 
 def evaluate_hallucination_risk(prompt: str, response: str) -> int:
+    """Evaluate whether the prompt-response pair contains speculative markers.
+
+    Args:
+        prompt: The original user prompt.
+        response: The AI-generated response.
+
+    Returns:
+        0 when a configured future-claim marker is detected; otherwise 2.
+    """
     combined_text = f"{prompt} {response}".lower()
 
     for marker in FUTURE_CLAIM_MARKERS:
@@ -53,6 +83,14 @@ def evaluate_hallucination_risk(prompt: str, response: str) -> int:
 
 
 def evaluate_clarity(response: str) -> int:
+    """Evaluate response clarity using configurable word-count thresholds.
+
+    Args:
+        response: The AI-generated response.
+
+    Returns:
+        A clarity score from 0 to 2.
+    """
     word_count = len(response.split())
 
     minimum_words = CONFIG["clarity"]["minimum_words"]
@@ -67,7 +105,21 @@ def evaluate_clarity(response: str) -> int:
     return 1
 
 
-def evaluate_response(prompt: str, response: str) -> dict:
+def evaluate_response(prompt: str, response: str) -> dict[str, int | float | str]:
+    """Evaluate one AI-generated response across all quality criteria.
+
+    Safety violations override the numerical score and produce a
+    ``Rejected`` label. Hallucination-risk violations produce a
+    ``Needs Review`` label.
+
+    Args:
+        prompt: The original user prompt.
+        response: The AI-generated response.
+
+    Returns:
+        A dictionary containing criterion scores, total score,
+        percentage score, and final quality label.
+    """
     relevance_score = evaluate_relevance(prompt, response)
     safety_score = evaluate_safety(response)
     hallucination_score = evaluate_hallucination_risk(prompt, response)
@@ -109,6 +161,17 @@ def evaluate_response(prompt: str, response: str) -> dict:
 
 
 def evaluate_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    """Evaluate every prompt-response pair in a pandas DataFrame.
+
+    The input DataFrame must contain ``prompt`` and ``response`` columns.
+    Evaluation results are appended as new columns.
+
+    Args:
+        df: DataFrame containing prompt-response pairs.
+
+    Returns:
+        A new DataFrame containing the original data and evaluation results.
+    """
     results = df.apply(
         lambda row: evaluate_response(
             row["prompt"],
@@ -123,4 +186,3 @@ def evaluate_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         [df.reset_index(drop=True), results_df],
         axis=1,
     )
-
