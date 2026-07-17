@@ -1,19 +1,22 @@
 # AI Response Quality Evaluator
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/Status-Active-success)
+![Python](https://img.shields.io/badge/Python-3.14-blue)
+
+![Tests](https://github.com/faizagohar/ai-response-quality-evaluator/actions/workflows/python-tests.yml/badge.svg)
+
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+
 
 A Python toolkit for evaluating AI-generated responses using structured quality metrics.
 
 ## Overview
 
-Large Language Models are increasingly used in production systems where response quality, safety, and reliability matter just as much as raw capability.
+## Overview
 
-This project demonstrates a lightweight evaluation pipeline for assessing AI responses against measurable quality criteria. It loads prompt-response pairs from JSON, evaluates responses across multiple quality dimensions, generates summary statistics, and exports the results as a CSV report.
+Large Language Models (LLMs) are increasingly deployed in production systems where response quality, safety, and reliability are critical.
 
-My professional background includes evaluatinganalysing production Large Language Models for factual accuracy, safety, hallucinations, instruction following, and policy compliance. This project was inspired by that experience and by my desire to translate structured AI evaluation into software using Python. The project reflects the evaluation mindset used in real-world AI quality assurance, where responses are assessed not only for correctness, but also for safety, hallucination risk, instruction following, and overall usefulness.
+This project implements a lightweight evaluation pipeline for assessing AI-generated responses against configurable quality criteria. It loads prompt-response pairs from JSON, evaluates responses across multiple dimensions, generates summary statistics, and exports the results as a CSV report.
 
-This project is intentionally lightweight, it serves as a foundation for more advanced AI evaluation workflows.
+The evaluation logic is configuration-driven, allowing scoring rules and safety criteria to be modified without changing the application code. The project also includes automated testing with pytest and Continuous Integration using GitHub Actions.
 
 ---
 
@@ -190,9 +193,11 @@ results/evaluation_results.csv
 
 ## Example Output
 
-![Program Output](output.png)
+The application evaluates AI-generated responses, assigns quality scores, classifies each response, and produces summary statistics.
 
-Example terminal execution showing the evaluation process, generated quality labels, and summary statistics.
+Below is an example execution of the evaluator:
+
+![Program Output](output.png)
 
 
 ## Error Handling
@@ -209,6 +214,11 @@ It detects:
 Instead of crashing, the application displays clear error messages.
 
 ---
+## Architecture
+
+See the project architecture here:
+
+[Architecture Diagram](docs/architecture.md)
 
 ## Future Improvements
 
